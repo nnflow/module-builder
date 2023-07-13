@@ -11,6 +11,9 @@ import ModuleType from "./form_components/ModuleType";
 import ModuleImports from "./form_components/ModuleImports";
 import ModuleRequirements from "./form_components/ModuleRequirements";
 import ModuleREADME from "./form_components/ModuleREADME";
+import ModulePreview from "./form_components/ModulePreview";
+import { AiOutlineDownload } from "react-icons/ai";
+import { saveAs } from "file-saver"
 
 const ModuleForm = () => {
   const form = useForm<ModuleSchemaType>({
@@ -29,7 +32,7 @@ const ModuleForm = () => {
   const inputsFieldArray = useFieldArray({ control: form.control, name: "inputs" });
   const outputsFieldArray = useFieldArray({ control: form.control, name: "outputs" });
 
-  const onSubmit: SubmitHandler<ModuleSchemaType> = (data) => {
+  const cleanData = (data: ModuleSchemaType) => {
     const cleanedData = { ...data };
     const args = [],
       inputs = [],
@@ -49,16 +52,19 @@ const ModuleForm = () => {
         outputs.push({ ...data.outputs[i] });
       }
     }
-    cleanedData.args =  args;
-    cleanedData.inputs =  inputs;
+    cleanedData.args = args;
+    cleanedData.inputs = inputs;
     cleanedData.outputs = outputs;
-
-    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(JSON.stringify(cleanedData, null, 4))}`;
-    const link = document.createElement("a");
-    link.href = jsonString;
-    link.download = "data.json";
-
-    link.click();
+    return cleanedData;
+  };
+  const onSubmit: SubmitHandler<ModuleSchemaType> = async (data) => {
+    const cleanedData = cleanData(data);
+    const str = JSON.stringify(cleanedData, null, 4);
+    const bytes = new TextEncoder().encode(str);
+    const blob = new Blob([bytes], {
+    type: "application/json;charset=utf-8"
+} )
+    saveAs(blob, `${data.name}.json`)
   };
 
   return (
@@ -79,8 +85,13 @@ const ModuleForm = () => {
             <ModuleRequirements formInstance={form} />
             <ModuleREADME formInstance={form} />
             <Button type="submit" className="mt-4">
-              Create Module
+              <AiOutlineDownload className="mr-2 text-xl" /> Create Module
             </Button>
+            <ModulePreview
+              className="ml-8"
+              getData={() => cleanData(form.getValues())}
+              onCreate={() => form.handleSubmit(onSubmit)}
+            />
           </form>
         </Form>
       </div>
