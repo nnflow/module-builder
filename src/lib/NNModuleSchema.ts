@@ -35,7 +35,8 @@ export const ModuleSchema = z.object({
       value: z.number().optional(),
     })
     .array(),
-  requirements: z.string().optional()
+  requirements: z.string().optional(),
+  readme: z.string().optional()
 });
 
 export type ModuleSchemaType = z.infer<typeof ModuleSchema>;
