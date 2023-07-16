@@ -1,4 +1,4 @@
-import ReactJson from "react-json-view";
+// import ReactJson from "react-json-view";
 import {
   Dialog,
   DialogContent,
@@ -28,7 +28,8 @@ const ModulePreview = ({ getData, className, previewClassName  }: ModulePreviewP
         <DialogHeader>
           <DialogTitle>Preview</DialogTitle>
         </DialogHeader>
-        <ReactJson src={getData()} />
+        
+        {/* TODO: add JSON viewer component */}
       </DialogContent>
     </Dialog>
   );

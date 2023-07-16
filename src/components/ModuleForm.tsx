@@ -99,11 +99,11 @@ const ModuleForm = () => {
             <Button type="submit" className="mt-4">
               <AiOutlineDownload className="mr-2 text-xl" /> Create Module
             </Button>
-            <ModulePreview
+            {/* <ModulePreview
               className="ml-8"
               getData={() => cleanData(form.getValues())}
               onCreate={() => form.handleSubmit(onSubmit)}
-            />
+            /> */}
           </form>
         </Form>
       </div>
