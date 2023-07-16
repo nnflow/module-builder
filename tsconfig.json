@@ -24,7 +24,9 @@
     "baseUrl": "src",
     "paths": {
       "@/*": ["./*"]
-    }
+    },
+
+    "types": [ "@types/wicg-file-system-access"]
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]

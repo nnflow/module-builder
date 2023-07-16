@@ -13,12 +13,12 @@ import ModuleRequirements from "./form_components/ModuleRequirements";
 import ModuleREADME from "./form_components/ModuleREADME";
 import ModulePreview from "./form_components/ModulePreview";
 import { AiOutlineDownload } from "react-icons/ai";
-import { saveAs } from "file-saver"
 
 const ModuleForm = () => {
   const form = useForm<ModuleSchemaType>({
     resolver: zodResolver(ModuleSchema),
     defaultValues: {
+      name: "CustomModule",
       inputs: [{}],
       args: [{}],
       outputs: [{}],
@@ -60,11 +60,23 @@ const ModuleForm = () => {
   const onSubmit: SubmitHandler<ModuleSchemaType> = async (data) => {
     const cleanedData = cleanData(data);
     const str = JSON.stringify(cleanedData, null, 4);
-    const bytes = new TextEncoder().encode(str);
-    const blob = new Blob([bytes], {
-    type: "application/json;charset=utf-8"
-} )
-    saveAs(blob, `${data.name}.json`)
+    const options: SaveFilePickerOptions = {
+      types: [
+        {
+          description: "Save",
+          accept: {
+            "application/json": [".json"],
+          },
+        },
+      ],
+      suggestedName: `${data.name}.json`
+    };
+    
+    const handle = await window.showSaveFilePicker(options);
+    const writable = await handle.createWritable();
+    
+    await writable.write(str);
+    await writable.close();
   };
 
   return (
