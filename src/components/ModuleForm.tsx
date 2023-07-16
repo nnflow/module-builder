@@ -11,7 +11,7 @@ import ModuleType from "./form_components/ModuleType";
 import ModuleImports from "./form_components/ModuleImports";
 import ModuleRequirements from "./form_components/ModuleRequirements";
 import ModuleREADME from "./form_components/ModuleREADME";
-import ModulePreview from "./form_components/ModulePreview";
+// import ModulePreview from "./form_components/ModulePreview";
 import { AiOutlineDownload } from "react-icons/ai";
 
 const ModuleForm = () => {

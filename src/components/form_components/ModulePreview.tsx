@@ -12,13 +12,13 @@ import { Button } from "@/components/ui/button";
 import { AiOutlineEye } from "react-icons/ai";
 
 type ModulePreviewProps = {
-    getData: CallableFunction;
+    // getData: CallableFunction;
     onCreate: CallableFunction;
     className?: string;
     previewClassName?: string;
 }
 
-const ModulePreview = ({ getData, className, previewClassName  }: ModulePreviewProps) => {
+const ModulePreview = ({ className, previewClassName  }: ModulePreviewProps) => {
   return (
     <Dialog>
       <DialogTrigger asChild>
