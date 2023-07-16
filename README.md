@@ -2,7 +2,10 @@
 
 This project provides a easy to use visual frontend to create custom modules which can be exported to NNFlow to create all kinds of complex applications.
 
+This project can be accessed [here](https://module-builder.pages.dev/). Currently we suggest using Chrome only. More details can be found below.
+
 > This module builder is specifically made to design isolated modules (eg. Pytorch Modules like nn.Linear, nn.Conv2d etc.) without visual graph node builder. Please use NNFlow if you want to access graphical node builder. 
+
 
 ## Features
 * Supports adding arguments, inputs, outputs visually 
@@ -34,3 +37,7 @@ If you have any queries or suggestions regarding the project or codebase please 
 - [x] Add Preview Module JSON 
 - [x] Add https serving support in localhost to access filesystem features
 - [x] Add File System Preview while saving the json
+
+### Why only chrome?
+
+To save the created this project uses the Native File System features, which are supported fully on chrome only. We will try to add the polyfills for the other browsers as we can.
